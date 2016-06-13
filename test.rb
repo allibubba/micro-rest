@@ -35,7 +35,7 @@ class App < Test::Unit::TestCase
 
  ## Update
  def test_inventory_update
-   put '/inventory', :size_1 => 10, :size_2 => 10, :size_3 => 10
+   put '/inventory', :id => 1, :size_1 => 10, :size_2 => 10, :size_3 => 10
    assert_equal last_response.status, 200
    assert_equal last_response.header['Cntent-type'], 'application/json'
  end

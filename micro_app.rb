@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 require 'mongo'
 require 'json/ext'
+require File.join(Dir.pwd, "helpers", "mongo.rb")
 
 module Micro
   class MyApp < Sinatra::Base
@@ -37,6 +38,10 @@ module Micro
     put '/inventory/:id/?' do
       content_type :json
       # update record by id 
+      id = object_id(params[:id])
+      settings.mongo_db.find(:_id => id).
+      find_one_and_update('$set' => request.params)
+      document_by_id(id)
     end
 
     delete '/remove/:id' do
