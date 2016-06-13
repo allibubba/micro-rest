@@ -24,7 +24,14 @@ module Micro
 
     get '/inventory/:id/?' do
       content_type :json
-      # query inventory by id
+      # find record
+      id = object_id(id) if String === id
+      if id.nil?
+        {}.to_json
+      else
+        document = settings.mongo_db.find(:_id => id).to_a.first
+        (document || {}).to_json
+      end
     end
 
     put '/inventory/:id/?' do
