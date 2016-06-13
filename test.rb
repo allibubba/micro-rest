@@ -24,6 +24,7 @@ class App < Test::Unit::TestCase
  def test_inventory_create
    post '/inventory', :size_1 => 34, :size_2 => 25, :size_3 => 89
    assert_equal last_response.status, 200
+   # TODO: check record count to ensure new record is created
  end
 
  ## Read
@@ -31,6 +32,7 @@ class App < Test::Unit::TestCase
    get '/inventory', :id => 1
    assert_equal last_response.status, 200
    assert_equal last_response.header['Cntent-type'], 'application/json'
+   #TODO: create new record, assert content.body contains record data
  end
 
  ## Update
@@ -38,6 +40,7 @@ class App < Test::Unit::TestCase
    put '/inventory', :id => 1, :size_1 => 10, :size_2 => 10, :size_3 => 10
    assert_equal last_response.status, 200
    assert_equal last_response.header['Cntent-type'], 'application/json'
+   #TODO: need to assert updated data in response body
  end
 
  ## Delete
@@ -45,6 +48,7 @@ class App < Test::Unit::TestCase
    delete '/inventory', :id => 1
    assert_equal last_response.status, 200
    assert_equal last_response.header['Cntent-type'], 'application/json'
+   #TODO: create new record, need to ensure record is destroyed
  end
 
 

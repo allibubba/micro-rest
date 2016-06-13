@@ -44,17 +44,18 @@ module Micro
       document_by_id(id)
     end
 
-    delete '/remove/:id' do
+    delete '/inventory/:id' do
       content_type :json
       # delete record where id
+      db = settings.mongo_db
+      id = object_id params[:id]
+      if !documents.to_a.first.nil?
+        documents.find_one_and_delete
+        {:success => true}.to_json
+      else
+        {:success => false}.to_json
+      end
     end
-
-
-
-
-
-
-
 
 
 

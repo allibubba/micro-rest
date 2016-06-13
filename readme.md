@@ -2,8 +2,8 @@
 
 #### todo
 - [x] init project
-- [ ] add data source
-- [ ] create api enpoint tests
+- [x] add data source
+- [x] create api enpoint tests
 - [ ] pass tests
 
 
