@@ -1,14 +1,9 @@
-# require 'sinatra'
-# require 'json'
-# require 'mongo'
-# require 'json/ext'
-
-# $:.unshift File.expand_path('../lib', __FILE__)  # add ./lib to $LOAD_PATH
 require 'rubygems'
 require 'sinatra'
-require 'mongoid'
 require 'bson'
 require 'json/ext' # required for .to_json
+require 'mongoid'
+Mongoid.load!("./mongoid.yml")
 
 module Micro
 
@@ -22,16 +17,6 @@ module Micro
 
   class MyApp < Sinatra::Base
     use Rack::MethodOverride
-
-    configure do
-      Mongoid.configure do |config|
-        config.sessions = {
-          :default => {
-            :hosts => ["localhost:27017"], :database => "test"
-          }
-        }
-      end
-    end
 
     ## Endpoints
     get '/' do
