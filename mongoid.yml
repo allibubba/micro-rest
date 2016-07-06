@@ -1,6 +1,12 @@
 development:
   clients:
     default:
-      database: test
+      database: rest
+      hosts:
+        - localhost:27017
+test:
+  clients:
+    default:
+      database: spec
       hosts:
         - localhost:27017

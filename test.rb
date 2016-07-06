@@ -1,8 +1,9 @@
-ENV['RACK_ENV'] = 'test'
 
 require File.join(Dir.pwd, "micro_app.rb")
 require 'test/unit'
 require 'rack/test'
+require "mocha/test_unit"
+ENV['RACK_ENV'] = 'test'
 
 
 class App < Test::Unit::TestCase
@@ -12,6 +13,12 @@ class App < Test::Unit::TestCase
     Micro::MyApp
   end
 
+  ### Models
+  def test_mocking_inventory
+    inventory = Micro::Inventory.new
+    Micro::Inventory.expects(:find).with(1).returns(inventory)
+    assert_equal inventory, Micro::Inventory.find(1)
+  end
 
 
   ### CRUD
@@ -24,23 +31,29 @@ class App < Test::Unit::TestCase
 
   ## Read
   def test_inventory_read
-    get '/inventory', :id => 1
+    data = {product_id:1}
+    i = Micro::Inventory.create data
+    get "/inventory/#{i.product_id}"
     assert_equal last_response.status, 200
-    assert_equal last_response.header['Cntent-type'], 'application/json'
+    assert_equal last_response.header['Content-type'], 'application/json'
   end
 
   ## Update
   def test_inventory_update
-    put '/inventory', :size_1 => 10, :size_2 => 10, :size_3 => 10
+    Micro::Inventory.create({ product_id:101, title:"old title"})
+    put '/inventory/101', :title => 'superTitleName'
     assert_equal last_response.status, 200
-    assert_equal last_response.header['Cntent-type'], 'application/json'
+    assert_equal last_response.header['Content-type'], 'application/json'
+    assert last_response.body.include?('superTitleName')
   end
 
   ## Delete
   def test_inventory_delete
-    delete '/inventory', :id => 1
+    data = {product_id:1}
+    i = Micro::Inventory.create data
+    delete "/inventory/#{i.product_id}"
     assert_equal last_response.status, 200
-    assert_equal last_response.header['Cntent-type'], 'application/json'
+    assert_equal last_response.header['Content-type'], 'application/json'
   end
 
 end

@@ -4,7 +4,8 @@
 - [x] init project
 - [x] add data source
 - [x] create api enpoint tests
-- [ ] pass tests
+- [x] pass tests
+- [ ] replace rack-test with rspec
 
 
 

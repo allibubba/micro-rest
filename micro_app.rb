@@ -4,7 +4,7 @@ require 'bson'
 require 'json/ext' # required for .to_json
 require 'mongoid'
 require 'pp'
-Mongoid.load!("./mongoid.yml", :development)
+Mongoid.load!("./mongoid.yml")
 
 module Micro
 
