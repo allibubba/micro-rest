@@ -1,16 +1,18 @@
+ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 require 'rspec'
-
-ENV['RACK_ENV'] = 'test'
-
+require 'mongoid-rspec'
+require File.join(Dir.pwd, "spec/support/mongoid.rb")
 require File.expand_path '../../micro_app.rb', __FILE__
+
+# Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f} 
+
+
 
 module RSpecMixin
     include Rack::Test::Methods
       def app() Micro::MyApp end
 end
-
-# RSpec.configure { |c| c.include RSpecMixin }
 
 RSpec.configure do |config|
   config.include RSpecMixin
