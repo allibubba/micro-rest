@@ -13,4 +13,5 @@ group :test do
   gem 'rack-test', '~> 0.6.3'
   gem 'test-unit', '~> 3.2'
   gem 'rspec'
+  gem 'faker'
 end

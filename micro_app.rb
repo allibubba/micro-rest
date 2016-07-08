@@ -37,7 +37,7 @@ module Micro
     # find record
     get '/inventory/:product_id' do
       content_type :json
-      inventory = Inventory.where(:product_id => params[:product_id])
+      inventory = Inventory.where(:product_id => params[:product_id]).first
       inventory.to_json
 
     end
@@ -55,9 +55,9 @@ module Micro
         content_type :json
         inventory = Inventory.where(:product_id => params[:product_id])
         if inventory.delete
-          puts "deleted"
+          { :status => 'success', :message => "Inventory with product id: #{params[:product_id]} has been deleted", :product_id => params[:product_id] }.to_json
         else
-          puts "not deleted"
+          { :status => 'fail', :message => "Inventory not deleted", :product_id => params[:product_id] }.to_json
         end
       end
 

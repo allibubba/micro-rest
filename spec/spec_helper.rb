@@ -2,6 +2,7 @@ ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 require 'rspec'
 require 'mongoid-rspec'
+require 'faker'
 require File.join(Dir.pwd, "spec/support/mongoid.rb")
 require File.expand_path '../../micro_app.rb', __FILE__
 
