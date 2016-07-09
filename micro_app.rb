@@ -50,16 +50,16 @@ module Micro
       inventory.to_json
     end
 
-      # delete
-      delete '/inventory/:product_id' do
-        content_type :json
-        inventory = Inventory.where(:product_id => params[:product_id])
-        if inventory.delete
-          { :status => 'success', :message => "Inventory with product id: #{params[:product_id]} has been deleted", :product_id => params[:product_id] }.to_json
-        else
-          { :status => 'fail', :message => "Inventory not deleted", :product_id => params[:product_id] }.to_json
-        end
+    # delete
+    delete '/inventory/:product_id' do
+      content_type :json
+      inventory = Inventory.where(:product_id => params[:product_id])
+      if inventory.delete
+        { :status => 'success', :message => "Inventory with product id: #{params[:product_id]} has been deleted", :product_id => params[:product_id] }.to_json
+      else
+        { :status => 'fail', :message => "Inventory not deleted", :product_id => params[:product_id] }.to_json
       end
-
     end
+
   end
+end

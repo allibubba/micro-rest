@@ -12,6 +12,10 @@ class App < Test::Unit::TestCase
   def app
     Micro::MyApp
   end
+  
+  def create_inv
+    Micro::Inventory.create({product_id:1})
+  end
 
   ### Models
   def test_mocking_inventory
@@ -31,8 +35,7 @@ class App < Test::Unit::TestCase
 
   ## Read
   def test_inventory_read
-    data = {product_id:1}
-    i = Micro::Inventory.create data
+    i = create_inv
     get "/inventory/#{i.product_id}"
     assert_equal last_response.status, 200
     assert_equal last_response.header['Content-type'], 'application/json'
@@ -49,8 +52,7 @@ class App < Test::Unit::TestCase
 
   ## Delete
   def test_inventory_delete
-    data = {product_id:1}
-    i = Micro::Inventory.create data
+    i = create_inv
     delete "/inventory/#{i.product_id}"
     assert_equal last_response.status, 200
     assert_equal last_response.header['Content-type'], 'application/json'
