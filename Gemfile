@@ -14,4 +14,5 @@ group :test do
   gem 'test-unit', '~> 3.2'
   gem 'rspec'
   gem 'faker'
+  gem 'factory_girl'
 end

@@ -18,11 +18,9 @@ describe "API endpoints" do
 
   ## Read
   context 'find by product_id' do
-    let!(:inventory){Micro::Inventory.first_or_create(
-      title: Faker::Internet.slug,
-      count: Faker::Number.between(1, 100),
-      product_id: Faker::Number.between(5)
-    )}
+    let!(:inventory){
+      FactoryGirl.create(:inventory)
+    }
     it "finds inventory" do
       get "/inventory/#{inventory.product_id}"
       expect(last_response.body).to eq(inventory.to_json)
@@ -32,11 +30,9 @@ describe "API endpoints" do
 
   ## Update
   context 'update by product_id' do
-    let!(:inventory){Micro::Inventory.first_or_create(
-      title: Faker::Internet.slug,
-      count: Faker::Number.between(1, 100),
-      product_id: Faker::Number.between(5)
-    )}
+    let!(:inventory){
+      FactoryGirl.create(:inventory)
+    }
     it "updates inventory" do
       update_title_to = Faker::Internet.slug
       put "/inventory/#{inventory.product_id}", title:update_title_to
@@ -49,11 +45,9 @@ describe "API endpoints" do
 
   ## Delete
   context 'delete by product_id' do
-    let!(:inventory){Micro::Inventory.first_or_create(
-      title: Faker::Internet.slug,
-      count: Faker::Number.between(1, 100),
-      product_id: Faker::Number.between(5)
-    )}
+    let!(:inventory){
+      FactoryGirl.create(:inventory)
+    }
     it "deletes inventory" do
       delete "/inventory/#{inventory.product_id}"
       response_json = JSON.parse(last_response.body)

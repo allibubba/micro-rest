@@ -3,12 +3,14 @@ require 'rack/test'
 require 'rspec'
 require 'mongoid-rspec'
 require 'faker'
+require 'factory_girl'
 require File.join(Dir.pwd, "spec/support/mongoid.rb")
 require File.expand_path '../../micro_app.rb', __FILE__
 
 # Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f} 
 
-
+FactoryGirl.definition_file_paths = %w{./factories ./test/factories ./spec/factories}
+FactoryGirl.find_definitions
 
 module RSpecMixin
     include Rack::Test::Methods
